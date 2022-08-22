@@ -3,9 +3,9 @@
     "description": "A Laravel Package to work with the SendStack API",
     "keywords": [
         "beyondcode",
-        "getsendstack",
-        "laravel-sendstack",
-        "sendstack",
+        "getsendportal",
+        "laravel-sendportal",
+        "sendportal",
         "php"
     ],
     "homepage": "https://github.com/stephenjude/laravel-sendportal",

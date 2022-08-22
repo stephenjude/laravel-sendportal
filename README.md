@@ -16,15 +16,15 @@ composer require stephenjude/laravel-sendportal
 You can publish the config file with:
 
 ```bash
-php artisan vendor:publish --tag="sendstack-config"
+php artisan vendor:publish --tag="sendportal-config"
 ```
 
 ## Set up
 
 To start using this package, you need to add environment variables for:
 
-- `SENDSTACK_URL` - Optional, not really needed as this has a default
-- `SENDSTACK_TOKEN` - You can generate this from your getSendStack account.
+- `SENDPORTAL_URL` - Optional, not really needed as this has a default
+- `SENDPORTAL_TOKEN` - You can generate this from your getSendStack account.
 
 The package will pick these up in its configuration and use these when it resolves an instance of the `Client`.
 
@@ -160,7 +160,7 @@ $client = app()->make(
 
 $client->subscribers()->create(
     request: new SubscriberRequest(
-        email: 'contact@getsendstack.com', // Required
+        email: 'contact@getsendportal.com', // Required
         firstName: 'Send', // Optional
         lastName: 'Stack', // Optional
         tags: [
@@ -176,7 +176,7 @@ $client->subscribers()->create(
  */
 SendStack::subscribers()->create(
     request: new SubscriberRequest(
-        email: 'contact@getsendstack.com', // Required
+        email: 'contact@getsendportal.com', // Required
         firstName: 'Send', // Optional
         lastName: 'Stack', // Optional
         tags: [
@@ -205,7 +205,7 @@ $client = app()->make(
 $client->subscribers()->update(
     uuid: '1234-1234-1234-1234',
     request: new SubscriberRequest(
-        email: 'contact@getsendstack.com', // Required
+        email: 'contact@getsendportal.com', // Required
         firstName: 'Send', // Optional
         lastName: 'Stack', // Optional
         tags: [
@@ -222,7 +222,7 @@ $client->subscribers()->update(
 SendStack::subscribers()->update(
     uuid: '1234-1234-1234-1234',
     request: new SubscriberRequest(
-        email: 'contact@getsendstack.com', // Required
+        email: 'contact@getsendportal.com', // Required
         firstName: 'Send', // Optional
         lastName: 'Stack', // Optional
         tags: [

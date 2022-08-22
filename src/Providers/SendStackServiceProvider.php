@@ -25,8 +25,8 @@ class SendStackServiceProvider extends ServiceProvider
         $this->app->singleton(
             abstract: ClientContract::class,
             concrete: fn (): ClientContract => new Client(
-                url: strval(config('services.sendstack.url')),
-                token: strval(config('services.sendstack.token')),
+                url: strval(config('services.sendportal.url')),
+                token: strval(config('services.sendportal.token')),
             ),
         );
     }
