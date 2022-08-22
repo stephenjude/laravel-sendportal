@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace SendStack\Laravel\Concerns;
+namespace SendPortal\Laravel\Concerns;
 
-use SendStack\Laravel\Http\Client;
+use SendPortal\Laravel\Http\Client;
 
 /**
  * @mixin Client

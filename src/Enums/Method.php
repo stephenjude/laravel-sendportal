@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace SendStack\Laravel\Enums;
+namespace SendPortal\Laravel\Enums;
 
 enum Method: string
 {

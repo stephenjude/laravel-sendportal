@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace SendStack\Laravel\DataObjects;
+namespace SendPortal\Laravel\DataObjects;
 
 use Illuminate\Support\Carbon;
 use JustSteveKing\DataObjects\Contracts\DataObjectContract;
-use SendStack\Laravel\Enums\Status;
+use SendPortal\Laravel\Enums\Status;
 
 class Subscriber implements DataObjectContract
 {

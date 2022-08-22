@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace SendStack\Laravel\DataObjects;
+namespace SendPortal\Laravel\DataObjects;
 
 use JustSteveKing\DataObjects\Contracts\DataObjectContract;
 

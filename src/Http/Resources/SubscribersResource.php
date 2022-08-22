@@ -2,20 +2,20 @@
 
 declare(strict_types=1);
 
-namespace SendStack\Laravel\Http\Resources;
+namespace SendPortal\Laravel\Http\Resources;
 
 use Illuminate\Support\Carbon;
 use JustSteveKing\DataObjects\Contracts\DataObjectContract;
-use SendStack\Laravel\Collections\SubscriberCollection;
-use SendStack\Laravel\DataObjects\Name;
-use SendStack\Laravel\DataObjects\Subscriber;
-use SendStack\Laravel\DataObjects\Tag;
-use SendStack\Laravel\Enums\Method;
-use SendStack\Laravel\Enums\Status;
-use SendStack\Laravel\Exceptions\SendStackApiException;
-use SendStack\Laravel\Http\Requests\SubscriberRequest;
+use SendPortal\Laravel\Collections\SubscriberCollection;
+use SendPortal\Laravel\DataObjects\Name;
+use SendPortal\Laravel\DataObjects\Subscriber;
+use SendPortal\Laravel\DataObjects\Tag;
+use SendPortal\Laravel\Enums\Method;
+use SendPortal\Laravel\Enums\Status;
+use SendPortal\Laravel\Exceptions\SendPortalApiException;
+use SendPortal\Laravel\Http\Requests\SubscriberRequest;
 
-class SubscribersResource extends SendStackResource
+class SubscribersResource extends SendPortalResource
 {
     public function all(): SubscriberCollection
     {
@@ -25,7 +25,7 @@ class SubscribersResource extends SendStackResource
         );
 
         if ($response->failed()) {
-            throw new SendStackApiException(
+            throw new SendPortalApiException(
                 response: $response,
             );
         }
@@ -48,7 +48,7 @@ class SubscribersResource extends SendStackResource
         );
 
         if ($response->failed()) {
-            throw new SendStackApiException(
+            throw new SendPortalApiException(
                 response: $response,
             );
         }
@@ -69,7 +69,7 @@ class SubscribersResource extends SendStackResource
         );
 
         if ($response->failed()) {
-            throw new SendStackApiException(
+            throw new SendPortalApiException(
                 response: $response,
             );
         }
@@ -90,7 +90,7 @@ class SubscribersResource extends SendStackResource
         );
 
         if ($response->failed()) {
-            throw new SendStackApiException(
+            throw new SendPortalApiException(
                 response: $response,
             );
         }
@@ -108,7 +108,7 @@ class SubscribersResource extends SendStackResource
         );
 
         if ($response->failed()) {
-            throw new SendStackApiException(
+            throw new SendPortalApiException(
                 response: $response,
             );
         }
@@ -127,7 +127,7 @@ class SubscribersResource extends SendStackResource
         );
 
         if ($response->failed()) {
-            throw new SendStackApiException(
+            throw new SendPortalApiException(
                 response: $response,
             );
         }
@@ -145,7 +145,7 @@ class SubscribersResource extends SendStackResource
         );
 
         if ($response->failed()) {
-            throw new SendStackApiException(
+            throw new SendPortalApiException(
                 response: $response,
             );
         }

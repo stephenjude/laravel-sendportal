@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace SendStack\Laravel\Concerns;
+namespace SendPortal\Laravel\Concerns;
 
 use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Support\Facades\Http;
-use SendStack\Laravel\Http\Client;
+use SendPortal\Laravel\Http\Client;
 
 /**
  * @mixin Client
@@ -20,7 +20,7 @@ trait CanBuildRequests
         )->timeout(
             seconds: 15,
         )->withUserAgent(
-            userAgent: 'Laravel_SendStack_Package_v1',
+            userAgent: 'Laravel_SendPortal_Package_v1',
         )->withToken(
             token: $this->token(),
         );

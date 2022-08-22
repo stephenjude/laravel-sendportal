@@ -1,11 +1,10 @@
 {
     "name": "stephenjude/laravel-sendportal",
-    "description": "A Laravel Package to work with the SendStack API",
+    "description": "A Laravel Package to work with the SendPortal API",
     "keywords": [
-        "beyondcode",
-        "getsendportal",
-        "laravel-sendportal",
         "sendportal",
+        "laravel-sendportal",
+        "laravel",
         "php"
     ],
     "homepage": "https://github.com/stephenjude/laravel-sendportal",
@@ -13,24 +12,24 @@
     "authors": [
         {
             "role": "Developer",
-            "name": "Steve McDougall",
-            "email": "juststevemcd@gmail.com",
-            "homepage": "https://www.juststeveking.uk/"
+            "name": "Stephen Jude",
+            "email": "stephenjudesuccess@gmail.com",
+            "homepage": "https://github.com/stephenjude/"
         }
     ],
     "autoload": {
         "psr-4": {
-            "SendStack\\Laravel\\": "src/"
+            "SendPortal\\Laravel\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "SendStack\\Laravel\\Tests\\": "tests/"
+            "SendPortal\\Laravel\\Tests\\": "tests/"
         }
     },
     "require": {
-        "php": "^8.1",
-        "illuminate/contracts": "^9.25",
+        "php": "^8.0|^8.1",
+        "illuminate/contracts": "^8.75",
         "juststeveking/http-status-code": "^3.0",
         "juststeveking/laravel-data-object-tools": "^1.0"
     },
@@ -38,7 +37,7 @@
         "guzzlehttp/guzzle": "^7.4",
         "laravel/pint": "^1.1",
         "nunomaduro/larastan": "^2.1",
-        "orchestra/testbench": "^7.6",
+        "orchestra/testbench": "^6.0",
         "pestphp/pest": "^1.21"
     },
     "scripts": {
@@ -53,10 +52,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "SendStack\\Laravel\\Providers\\SendStackServiceProvider"
+                "SendPortalServiceProvider"
             ],
             "aliases": {
-                "SendStack": "SendStack\\Laravel\\Facades\\SendStack"
+                "SendPortal": "SendPortal"
             }
         }
     },

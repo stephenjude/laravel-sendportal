@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-use SendStack\Laravel\Collections\SubscriberCollection;
-use SendStack\Laravel\DataObjects\Subscriber;
-use SendStack\Laravel\Http\Client;
-use SendStack\Laravel\Http\Requests\SubscriberRequest;
+use SendPortal\Laravel\Collections\SubscriberCollection;
+use SendPortal\Laravel\DataObjects\Subscriber;
+use SendPortal\Laravel\Http\Client;
+use SendPortal\Laravel\Http\Requests\SubscriberRequest;
 
 it('can get a list of subscribers', function (string $string) {
     fakeClient(

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace SendStack\Laravel\Concerns;
+namespace SendPortal\Laravel\Concerns;
 
 use Illuminate\Http\Client\Response;
-use SendStack\Laravel\Http\Client;
-use SendStack\Laravel\Enums\Method;
+use SendPortal\Laravel\Http\Client;
+use SendPortal\Laravel\Enums\Method;
 
 /**
  * @mixin Client

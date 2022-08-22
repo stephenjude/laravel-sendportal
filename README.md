@@ -24,13 +24,13 @@ php artisan vendor:publish --tag="sendportal-config"
 To start using this package, you need to add environment variables for:
 
 - `SENDPORTAL_URL` - Optional, not really needed as this has a default
-- `SENDPORTAL_TOKEN` - You can generate this from your getSendStack account.
+- `SENDPORTAL_TOKEN` - You can generate this from your SendPortal account.
 
 The package will pick these up in its configuration and use these when it resolves an instance of the `Client`.
 
 ## Usage
 
-This package can be used by injecting the `SendStack\Laravel\Http\Client` into a method to instantiate the client:
+This package can be used by injecting the `SendPortal\Laravel\Http\Client` into a method to instantiate the client:
 
 ```php
 declare(strict_types=1);
@@ -41,9 +41,9 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use SendStack\Laravel\Contracts\ClientContract;
+use SendPortal\Laravel\Contracts\ClientContract;
 
-namespace App\Jobs\SendStack;
+namespace App\Jobs\SendPortal;
 
 class SyncSubscribers implements ShouldQueue
 {
@@ -75,9 +75,9 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use SendStack\Laravel\Facades\SendStack;
+use SendPortal\Laravel\Facades\SendPortal;
 
-namespace App\Jobs\SendStack;
+namespace App\Jobs\SendPortal;
 
 class SyncSubscribers implements ShouldQueue
 {
@@ -88,7 +88,7 @@ class SyncSubscribers implements ShouldQueue
     
     public function handle(): void
     {
-        foreach (SendStack::subscribers()->all() as $subscriber) {
+        foreach (SendPortal::subscribers()->all() as $subscriber) {
             Subscriber::query()->updateOrCreate(
                 attributes: ['email' => $subscriber->email],
                 values: $subscriber->toArray(),
@@ -101,8 +101,8 @@ class SyncSubscribers implements ShouldQueue
 ### Getting a list of Subscribers
 
 ```php
-use SendStack\Laravel\Contracts\ClientContract;
-use SendStack\Laravel\Facades\SendStack;
+use SendPortal\Laravel\Contracts\ClientContract;
+use SendPortal\Laravel\Facades\SendPortal;
 
 /**
  * Without a Facade
@@ -116,14 +116,14 @@ $client->subscribers()->all();
 /**
  * Using the Facade
  */
-SendStack::subscribers()->all();
+SendPortal::subscribers()->all();
 ```
 
 ### Getting a single Subscriber
 
 ```php
-use SendStack\Laravel\Contracts\ClientContract;
-use SendStack\Laravel\Facades\SendStack;
+use SendPortal\Laravel\Contracts\ClientContract;
+use SendPortal\Laravel\Facades\SendPortal;
 
 /**
  * Without a Facade
@@ -139,7 +139,7 @@ $client->subscribers()->get(
 /**
  * Using the Facade
  */
-SendStack::subscribers()->get(
+SendPortal::subscribers()->get(
     query: '1234-1234-1234-1234', // This can be either the subscribers UUID or their Email Address
 );
 ```
@@ -147,9 +147,9 @@ SendStack::subscribers()->get(
 ### Creating a new Subscriber
 
 ```php
-use SendStack\Laravel\Contracts\ClientContract;
-use SendStack\Laravel\Facades\SendStack;
-use SendStack\Laravel\Http\Requests\SubscriberRequest;
+use SendPortal\Laravel\Contracts\ClientContract;
+use SendPortal\Laravel\Facades\SendPortal;
+use SendPortal\Laravel\Http\Requests\SubscriberRequest;
 
 /**
  * Without a Facade
@@ -174,7 +174,7 @@ $client->subscribers()->create(
 /**
  * Using the Facade
  */
-SendStack::subscribers()->create(
+SendPortal::subscribers()->create(
     request: new SubscriberRequest(
         email: 'contact@getsendportal.com', // Required
         firstName: 'Send', // Optional
@@ -191,9 +191,9 @@ SendStack::subscribers()->create(
 ### Update a Subscriber
 
 ```php
-use SendStack\Laravel\Contracts\ClientContract;
-use SendStack\Laravel\Facades\SendStack;
-use SendStack\Laravel\Http\Requests\SubscriberRequest;
+use SendPortal\Laravel\Contracts\ClientContract;
+use SendPortal\Laravel\Facades\SendPortal;
+use SendPortal\Laravel\Http\Requests\SubscriberRequest;
 
 /**
  * Without a Facade
@@ -219,7 +219,7 @@ $client->subscribers()->update(
 /**
  * Using the Facade
  */
-SendStack::subscribers()->update(
+SendPortal::subscribers()->update(
     uuid: '1234-1234-1234-1234',
     request: new SubscriberRequest(
         email: 'contact@getsendportal.com', // Required
@@ -237,8 +237,8 @@ SendStack::subscribers()->update(
 ### Deleting a Subscriber
 
 ```php
-use SendStack\Laravel\Contracts\ClientContract;
-use SendStack\Laravel\Facades\SendStack;
+use SendPortal\Laravel\Contracts\ClientContract;
+use SendPortal\Laravel\Facades\SendPortal;
 
 /**
  * Without a Facade
@@ -254,7 +254,7 @@ $client->subscribers()->delete(
 /**
  * Using the Facade
  */
-SendStack::subscribers()->delete(
+SendPortal::subscribers()->delete(
     uuid: '1234-1234-1234-1234',
 );
 ```
@@ -262,8 +262,8 @@ SendStack::subscribers()->delete(
 ### Attaching a Tag to a Subscriber
 
 ```php
-use SendStack\Laravel\Contracts\ClientContract;
-use SendStack\Laravel\Facades\SendStack;
+use SendPortal\Laravel\Contracts\ClientContract;
+use SendPortal\Laravel\Facades\SendPortal;
 
 /**
  * Without a Facade
@@ -280,7 +280,7 @@ $client->subscribers()->attachTag(
 /**
  * Using the Facade
  */
-SendStack::subscribers()->attachTag(
+SendPortal::subscribers()->attachTag(
     uuid: '1234-1234-1234-1234',
     tag: 'Early Access',
 );
@@ -289,8 +289,8 @@ SendStack::subscribers()->attachTag(
 ### Removing a Tag from a Subscriber
 
 ```php
-use SendStack\Laravel\Contracts\ClientContract;
-use SendStack\Laravel\Facades\SendStack;
+use SendPortal\Laravel\Contracts\ClientContract;
+use SendPortal\Laravel\Facades\SendPortal;
 
 /**
  * Without a Facade
@@ -307,7 +307,7 @@ $client->subscribers()->removeTag(
 /**
  * Using the Facade
  */
-SendStack::subscribers()->removeTag(
+SendPortal::subscribers()->removeTag(
     uuid: '1234-1234-1234-1234',
     tag: 'Early Access',
 );
@@ -316,8 +316,8 @@ SendStack::subscribers()->removeTag(
 ### Checking if an email address is an Active Subscriber
 
 ```php
-use SendStack\Laravel\Contracts\ClientContract;
-use SendStack\Laravel\Facades\SendStack;
+use SendPortal\Laravel\Contracts\ClientContract;
+use SendPortal\Laravel\Facades\SendPortal;
 
 /**
  * Without a Facade
@@ -333,7 +333,7 @@ $client->isActiveSubscriber(
 /**
  * Using the Facade
  */
-SendStack::isActiveSubscriber(
+SendPortal::isActiveSubscriber(
     email: 'taylor@laravel.com',
 );
 ```
@@ -341,8 +341,8 @@ SendStack::isActiveSubscriber(
 ### Getting all Tags
 
 ```php
-use SendStack\Laravel\Contracts\ClientContract;
-use SendStack\Laravel\Facades\SendStack;
+use SendPortal\Laravel\Contracts\ClientContract;
+use SendPortal\Laravel\Facades\SendPortal;
 
 /**
  * Without a Facade
@@ -356,15 +356,15 @@ $client->tags()->all();
 /**
  * Using the Facade
  */
-SendStack::tags()->all();
+SendPortal::tags()->all();
 ```
 
 ### Creating a new Tag
 
 ```php
-use SendStack\Laravel\Contracts\ClientContract;
-use SendStack\Laravel\Facades\SendStack;
-use SendStack\Laravel\Http\Requests\TagRequest;
+use SendPortal\Laravel\Contracts\ClientContract;
+use SendPortal\Laravel\Facades\SendPortal;
+use SendPortal\Laravel\Http\Requests\TagRequest;
 
 /**
  * Without a Facade
@@ -383,7 +383,7 @@ $client->tags()->create(
 /**
  * Using the Facade
  */
-SendStack::tags()->create(
+SendPortal::tags()->create(
     request: new TagRequest(
         name: 'Test', // Required
         allowFormSubscription: true, // Optional

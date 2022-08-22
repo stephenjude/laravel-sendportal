@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace SendStack\Laravel\Facades;
+namespace SendPortal\Laravel\Facades;
 
 use Illuminate\Support\Facades\Facade;
-use SendStack\Laravel\Http\Client;
-use SendStack\Laravel\Http\Resources\SubscribersResource;
-use SendStack\Laravel\Http\Resources\TagResource;
+use SendPortal\Laravel\Http\Client;
+use SendPortal\Laravel\Http\Resources\SubscribersResource;
+use SendPortal\Laravel\Http\Resources\TagResource;
 
 /**
  * @method static SubscribersResource subscribers()
@@ -16,7 +16,7 @@ use SendStack\Laravel\Http\Resources\TagResource;
  *
  * @see Client
  */
-class SendStack extends Facade
+class SendPortal extends Facade
 {
     protected static function getFacadeAccessor()
     {

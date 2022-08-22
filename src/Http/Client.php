@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace SendStack\Laravel\Http;
+namespace SendPortal\Laravel\Http;
 
 use Closure;
 use Illuminate\Http\Client\Factory;
 use Illuminate\Support\Facades\Http;
-use SendStack\Laravel\Concerns\CanAccessProperties;
-use SendStack\Laravel\Concerns\CanBuildRequests;
-use SendStack\Laravel\Concerns\CanSendRequests;
-use SendStack\Laravel\Contracts\ClientContract;
-use SendStack\Laravel\Enums\Status;
-use SendStack\Laravel\Http\Resources\SubscribersResource;
-use SendStack\Laravel\Http\Resources\TagResource;
+use SendPortal\Laravel\Concerns\CanAccessProperties;
+use SendPortal\Laravel\Concerns\CanBuildRequests;
+use SendPortal\Laravel\Concerns\CanSendRequests;
+use SendPortal\Laravel\Contracts\ClientContract;
+use SendPortal\Laravel\Enums\Status;
+use SendPortal\Laravel\Http\Resources\SubscribersResource;
+use SendPortal\Laravel\Http\Resources\TagResource;
 use Throwable;
 
 class Client implements ClientContract

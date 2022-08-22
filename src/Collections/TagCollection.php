@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace SendStack\Laravel\Collections;
+namespace SendPortal\Laravel\Collections;
 
 use Illuminate\Support\Collection;
 

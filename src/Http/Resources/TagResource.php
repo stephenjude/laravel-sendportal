@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace SendStack\Laravel\Http\Resources;
+namespace SendPortal\Laravel\Http\Resources;
 
 use JustSteveKing\DataObjects\Contracts\DataObjectContract;
-use SendStack\Laravel\Collections\TagCollection;
-use SendStack\Laravel\DataObjects\Tag;
-use SendStack\Laravel\Enums\Method;
-use SendStack\Laravel\Exceptions\SendStackApiException;
-use SendStack\Laravel\Http\Requests\TagRequest;
+use SendPortal\Laravel\Collections\TagCollection;
+use SendPortal\Laravel\DataObjects\Tag;
+use SendPortal\Laravel\Enums\Method;
+use SendPortal\Laravel\Exceptions\SendPortalApiException;
+use SendPortal\Laravel\Http\Requests\TagRequest;
 
-class TagResource extends SendStackResource
+class TagResource extends SendPortalResource
 {
     public function all(): TagCollection
     {
@@ -21,7 +21,7 @@ class TagResource extends SendStackResource
         );
 
         if ($response->failed()) {
-            throw new SendStackApiException(
+            throw new SendPortalApiException(
                 response: $response,
             );
         }
@@ -47,7 +47,7 @@ class TagResource extends SendStackResource
         );
 
         if ($response->failed()) {
-            throw new SendStackApiException(
+            throw new SendPortalApiException(
                 response: $response,
             );
         }

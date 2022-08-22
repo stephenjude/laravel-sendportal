@@ -3,8 +3,8 @@
 declare(strict_types=1);
 
 use Illuminate\Support\Facades\Http;
-use SendStack\Laravel\Http\Client;
-use SendStack\Laravel\Tests\TestCase;
+use SendPortal\Laravel\Http\Client;
+use SendPortal\Laravel\Tests\TestCase;
 use JustSteveKing\StatusCode\Http as Status;
 
 uses(TestCase::class)->in('Feature');

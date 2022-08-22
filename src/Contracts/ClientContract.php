@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace SendStack\Laravel\Contracts;
+namespace SendPortal\Laravel\Contracts;
 
 use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Http\Client\Response;
-use SendStack\Laravel\Enums\Method;
-use SendStack\Laravel\Http\Resources\SubscribersResource;
-use SendStack\Laravel\Http\Resources\TagResource;
+use SendPortal\Laravel\Enums\Method;
+use SendPortal\Laravel\Http\Resources\SubscribersResource;
+use SendPortal\Laravel\Http\Resources\TagResource;
 
 interface ClientContract
 {

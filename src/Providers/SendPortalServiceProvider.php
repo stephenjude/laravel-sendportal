@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace SendStack\Laravel\Providers;
+namespace SendPortal\Laravel\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use SendStack\Laravel\Contracts\ClientContract;
-use SendStack\Laravel\Http\Client;
+use SendPortal\Laravel\Contracts\ClientContract;
+use SendPortal\Laravel\Http\Client;
 
-class SendStackServiceProvider extends ServiceProvider
+class SendPortalServiceProvider extends ServiceProvider
 {
     public function boot(): void
     {

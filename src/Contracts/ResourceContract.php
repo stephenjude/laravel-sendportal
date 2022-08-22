@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace SendStack\Laravel\Contracts;
+namespace SendPortal\Laravel\Contracts;
 
 interface ResourceContract
 {
