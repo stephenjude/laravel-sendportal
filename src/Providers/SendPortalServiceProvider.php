@@ -14,19 +14,17 @@ class SendPortalServiceProvider extends ServiceProvider
     {
         $this->mergeConfigFrom(
             path: __DIR__.'/../../config/services.php',
-            key: config_path(
-                path: 'services',
-            )
+            key: 'services',
         );
     }
 
     public function register(): void
     {
-        $this->app->singleton(
+        $this->app->bind(
             abstract: ClientContract::class,
             concrete: fn (): ClientContract => new Client(
-                url: strval(config('services.sendportal.url')),
-                token: strval(config('services.sendportal.token')),
+                url: config('services.sendportal.url'),
+                token: config('services.sendportal.token'),
             ),
         );
     }

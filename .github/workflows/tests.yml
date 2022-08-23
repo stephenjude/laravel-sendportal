@@ -28,6 +28,8 @@ jobs:
         include:
           - laravel: 9.*
             testbench: 7.*
+          - laravel: 8.*
+            testbench: 6.*
 
     name: PHP-${{ matrix.php }} -- Laravel-${{ matrix.laravel }} -- ${{ matrix.stability }} -- ${{ matrix.os }}
 

@@ -28,8 +28,8 @@
         }
     },
     "require": {
-        "php": "^8.0|^8.1",
-        "illuminate/contracts": "^8.75",
+        "php": "^8.1",
+        "illuminate/contracts": "^9.25",
         "juststeveking/http-status-code": "^3.0",
         "juststeveking/laravel-data-object-tools": "^1.0"
     },
@@ -37,7 +37,7 @@
         "guzzlehttp/guzzle": "^7.4",
         "laravel/pint": "^1.1",
         "nunomaduro/larastan": "^2.1",
-        "orchestra/testbench": "^6.0",
+        "orchestra/testbench": "^7.6",
         "pestphp/pest": "^1.21"
     },
     "scripts": {
@@ -52,10 +52,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "SendPortalServiceProvider"
+                "SendPortal\\Laravel\\Providers\\SendPortalServiceProvider"
             ],
             "aliases": {
-                "SendPortal": "SendPortal"
+                "SendPortal": "SendPortal\\Laravel\\Facades\\SendPortal"
             }
         }
     },

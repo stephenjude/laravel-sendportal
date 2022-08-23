@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace SendPortal\Laravel\Facades;
 
 use Illuminate\Support\Facades\Facade;
+use SendPortal\Laravel\Contracts\ClientContract;
 use SendPortal\Laravel\Http\Client;
 use SendPortal\Laravel\Http\Resources\SubscribersResource;
 use SendPortal\Laravel\Http\Resources\TagResource;
@@ -20,6 +21,6 @@ class SendPortal extends Facade
 {
     protected static function getFacadeAccessor()
     {
-        return Client::class;
+        return ClientContract::class;
     }
 }
