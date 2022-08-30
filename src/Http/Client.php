@@ -49,17 +49,18 @@ class Client implements ClientContract
         );
     }
 
-    public function isActiveSubscriber(string $email): bool
+    public function isActiveSubscriber(int $subscriberId): bool
     {
         try {
             $subscriber = $this->subscribers()->get(
-                query: $email,
+                subscriberId: $subscriberId,
             );
+
         } catch (Throwable) {
             return false;
         }
 
-        if ($subscriber->status !== Status::SUBSCRIBED) {
+        if (!is_null($subscriber->unsubscribed)) {
             return false;
         }
 

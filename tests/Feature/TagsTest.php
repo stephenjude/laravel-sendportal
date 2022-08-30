@@ -7,12 +7,22 @@ use SendPortal\Laravel\DataObjects\Tag;
 use SendPortal\Laravel\Http\Client;
 use SendPortal\Laravel\Http\Requests\TagRequest;
 
-it('can get a list of tags', function (string $string) {
+it('can get a list of tags', function (int $integer, string $string) {
     fakeClient(
         body: [
             'data' => [
-                $string,
-                "$string test",
+                [
+                    'id' => $integer,
+                    'name' => $string,
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ],
+                [
+                    'id' => $integer,
+                    'name' => $string,
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ],
             ]
         ],
     );
@@ -27,15 +37,21 @@ it('can get a list of tags', function (string $string) {
     )->toBeInstanceOf(
         TagCollection::class
     )->each(
-        fn ($tag) =>
-        $tag
+        fn($tag) => $tag
             ->toBeInstanceOf(Tag::class),
     );
-})->with('strings');
+})->with('integers', 'strings');
 
-it('can create a new tag', function (string $string) {
+it('can create a new tag', function (int $integer, string $string) {
     fakeClient(
-        body: [$string],
+        body: [
+            'data' => [
+                'id' => $integer,
+                'name' => $string,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+        ],
     );
 
     $client = new Client(
@@ -50,4 +66,4 @@ it('can create a new tag', function (string $string) {
             ),
         ),
     )->toBeInstanceOf(Tag::class);
-})->with('strings');
+})->with('integers', 'strings');

@@ -7,31 +7,27 @@ use SendPortal\Laravel\DataObjects\Subscriber;
 use SendPortal\Laravel\Http\Client;
 use SendPortal\Laravel\Http\Requests\SubscriberRequest;
 
-it('can get a list of subscribers', function (string $string) {
+it('can get a list of subscribers', function (int $integer, string $string) {
     fakeClient(
         body: [
             'data' => [
                 [
-                    'uuid' => $string,
+                    'id' => $integer,
                     'email' => $string,
                     'first_name' => $string,
                     'last_name' => $string,
-                    'meta' => $string,
-                    'tags' => [$string],
-                    'status' => 'subscibed',
-                    'confirmed_at' => now(),
                     'unsubscribed_at' => null,
+                    'created_at' => now(),
+                    'updated_at' => now(),
                 ],
                 [
-                    'uuid' => $string,
+                    'id' => $integer,
                     'email' => $string,
                     'first_name' => $string,
                     'last_name' => $string,
-                    'meta' => $string,
-                    'tags' => [$string],
-                    'status' => 'subscibed',
-                    'confirmed_at' => now()->subDays(),
                     'unsubscribed_at' => null,
+                    'created_at' => now(),
+                    'updated_at' => now(),
                 ],
             ],
         ],
@@ -47,24 +43,22 @@ it('can get a list of subscribers', function (string $string) {
     )->toBeInstanceOf(
         SubscriberCollection::class
     )->each(
-        fn ($subscriber) =>
-        $subscriber
-            ->toBeInstanceOf(Subscriber::class),
+        fn($subscriber) => $subscriber->toBeInstanceOf(Subscriber::class),
     );
-})->with('strings');
+})->with('integers', 'strings');
 
-it('can get a single subscriber', function (string $string) {
+it('can get a single subscriber', function (int $integer, string $string) {
     fakeClient(
         body: [
-            'uuid' => $string,
-            'email' => $string,
-            'first_name' => $string,
-            'last_name' => $string,
-            'meta' => $string,
-            'tags' => [$string],
-            'status' => 'subscibed',
-            'confirmed_at' => now(),
-            'unsubscribed_at' => null,
+            'data' => [
+                'id' => $integer,
+                'email' => $string,
+                'first_name' => $string,
+                'last_name' => $string,
+                'unsubscribed_at' => null,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]
         ],
     );
 
@@ -74,24 +68,24 @@ it('can get a single subscriber', function (string $string) {
     );
 
     expect(
-        $client->subscribers()->get(query: $string),
+        $client->subscribers()->get(subscriberId: $integer),
     )->toBeInstanceOf(
         Subscriber::class
     );
-})->with('strings');
+})->with('integers', 'strings');
 
-it('can create a new subscriber', function (string $string) {
+it('can create a new subscriber', function (int $integer, string $string) {
     fakeClient(
         body: [
-            'uuid' => $string,
-            'email' => $string,
-            'first_name' => $string,
-            'last_name' => $string,
-            'meta' => $string,
-            'tags' => [$string],
-            'status' => 'subscibed',
-            'confirmed_at' => now(),
-            'unsubscribed_at' => null,
+            'data' => [
+                'id' => $integer,
+                'email' => $string,
+                'first_name' => $string,
+                'last_name' => $string,
+                'unsubscribed_at' => null,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]
         ],
     );
 
@@ -106,25 +100,25 @@ it('can create a new subscriber', function (string $string) {
                 email: $string,
                 firstName: $string,
                 lastName: $string,
-                tags: [$string],
-                optIn: true,
+                tags: [1, 2],
+                optOut: false,
             ),
         ),
     )->toBeInstanceOf(Subscriber::class);
-})->with('strings');
+})->with('integers', 'strings');
 
-it('can update a subscriber', function (string $string) {
+it('can update a subscriber', function (int $integer, string $string) {
     fakeClient(
         body: [
-            'uuid' => $string,
-            'email' => $string,
-            'first_name' => $string,
-            'last_name' => $string,
-            'meta' => $string,
-            'tags' => [$string],
-            'status' => 'subscibed',
-            'confirmed_at' => now(),
-            'unsubscribed_at' => null,
+            'data' => [
+                'id' => $integer,
+                'email' => $string,
+                'first_name' => $string,
+                'last_name' => $string,
+                'unsubscribed_at' => null,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]
         ],
     );
 
@@ -135,16 +129,16 @@ it('can update a subscriber', function (string $string) {
 
     expect(
         $client->subscribers()->update(
-            uuid: $string,
+            subscriberId: $integer,
             request: new SubscriberRequest(
                 email: $string,
-                optIn: false,
+                optOut: false,
             ),
         )
     )->toBeInstanceOf(Subscriber::class);
-})->with('strings');
+})->with('integers', 'strings');
 
-it('can delete a subscriber', function (string $string) {
+it('can delete a subscriber', function (int $integer, string $string) {
     fakeClient(
         body: null,
     );
@@ -156,23 +150,23 @@ it('can delete a subscriber', function (string $string) {
 
     expect(
         $client->subscribers()->delete(
-            uuid: $string,
+            subscriberId: $integer,
         )
     )->toBeBool()->toEqual(true);
-})->with('strings');
+})->with('integers', 'strings');
 
-it('can check if an email is an active subscriber', function (string $string) {
+it('can check if an email is an active subscriber', function (int $integer, string $string) {
     fakeClient(
         body: [
-            'uuid' => $string,
-            'email' => $string,
-            'first_name' => $string,
-            'last_name' => $string,
-            'meta' => $string,
-            'tags' => [$string],
-            'status' => 'subscibed',
-            'confirmed_at' => now(),
-            'unsubscribed_at' => null,
+            'data' => [
+                'id' => $integer,
+                'email' => $string,
+                'first_name' => $string,
+                'last_name' => $string,
+                'unsubscribed_at' => null,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]
         ],
     );
 
@@ -183,24 +177,24 @@ it('can check if an email is an active subscriber', function (string $string) {
 
     expect(
         $client->isActiveSubscriber(
-            email: $string,
+            subscriberId: $integer,
         ),
     )->toBeBool()->toEqual(true);
-})->with('strings');
+})->with('integers', 'strings');
 
-it('can check if an email is an inactive subscriber', function (string $string) {
+it('can check if an email is an inactive subscriber', function (int $integer, string $string) {
     fakeClient(
         body: [
-                  'uuid' => $string,
-                  'email' => $string,
-                  'first_name' => $string,
-                  'last_name' => $string,
-                  'meta' => $string,
-                  'tags' => [$string],
-                  'status' => 'pending',
-                  'confirmed_at' => now(),
-                  'unsubscribed_at' => null,
-              ],
+            'data' => [
+                'id' => $integer,
+                'email' => $string,
+                'first_name' => $string,
+                'last_name' => $string,
+                'unsubscribed_at' => now(),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]
+        ],
     );
 
     $client = new Client(
@@ -210,7 +204,7 @@ it('can check if an email is an inactive subscriber', function (string $string) 
 
     expect(
         $client->isActiveSubscriber(
-            email: $string,
+            subscriberId: $integer,
         ),
     )->toBeBool()->toEqual(false);
-})->with('strings');
+})->with('integers', 'strings');

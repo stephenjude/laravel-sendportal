@@ -32,19 +32,19 @@ class SubscribersResource extends SendPortalResource
 
         return SubscriberCollection::make(
             items: array_map(
-                callback: fn (array $subscriber): DataObjectContract => $this->buildSubscriber(
+                callback: fn(array $subscriber): DataObjectContract => $this->buildSubscriber(
                     data: $subscriber
                 ),
-                array: (array) $response->json('data'),
+                array: $response->collect('data')->toArray(),
             ),
         );
     }
 
-    public function get(string $query): Subscriber
+    public function get(int $subscriberId): Subscriber
     {
         $response = $this->client->send(
             method: Method::GET,
-            url: "/subscribers/{$query}",
+            url: "/subscribers/{$subscriberId}",
         );
 
         if ($response->failed()) {
@@ -54,7 +54,7 @@ class SubscribersResource extends SendPortalResource
         }
 
         return $this->buildSubscriber(
-            data: $response->collect()->toArray(),
+            data: $response->json('data'),
         );
     }
 
@@ -75,15 +75,15 @@ class SubscribersResource extends SendPortalResource
         }
 
         return $this->buildSubscriber(
-            data: $response->collect()->toArray(),
+            data: $response->json('data'),
         );
     }
 
-    public function update(string $uuid, SubscriberRequest $request): Subscriber
+    public function update(int $subscriberId, SubscriberRequest $request): Subscriber
     {
         $response = $this->client->send(
             method: Method::PUT,
-            url: "/subscribers/{$uuid}",
+            url: "/subscribers/{$subscriberId}",
             options: [
                 'json' => $request->toArray(),
             ]
@@ -96,15 +96,15 @@ class SubscribersResource extends SendPortalResource
         }
 
         return $this->buildSubscriber(
-            data: $response->collect()->toArray(),
+            data: $response->json('data'),
         );
     }
 
-    public function delete(string $uuid): bool
+    public function delete(int $subscriberId): bool
     {
         $response = $this->client->send(
             method: Method::DELETE,
-            url: "/subscribers/{$uuid}",
+            url: "/subscribers/{$subscriberId}",
         );
 
         if ($response->failed()) {
@@ -116,11 +116,11 @@ class SubscribersResource extends SendPortalResource
         return $response->successful();
     }
 
-    public function attachTag(string $uuid, string $tag): Subscriber
+    public function attachTag(int $subscriberId, int $tag): Subscriber
     {
         $response = $this->client->send(
             method: Method::POST,
-            url: "/subscribers/{$uuid}/tags",
+            url: "/subscribers/{$subscriberId}/tags",
             options: [
                 'json' => ['tag' => $tag],
             ]
@@ -133,15 +133,15 @@ class SubscribersResource extends SendPortalResource
         }
 
         return $this->buildSubscriber(
-            data: $response->collect()->toArray(),
+            data: $response->json('data'),
         );
     }
 
-    public function removeTag(string $uuid, string $tag): Subscriber
+    public function removeTag(int $subscriberId, int $tag): Subscriber
     {
         $response = $this->client->send(
             method: Method::DELETE,
-            url: "/subscribers/{$uuid}/tags/{$tag}",
+            url: "/subscribers/{$subscriberId}/tags/{$tag}",
         );
 
         if ($response->failed()) {
@@ -151,34 +151,29 @@ class SubscribersResource extends SendPortalResource
         }
 
         return $this->buildSubscriber(
-            data: $response->collect()->toArray(),
+            data: $response->json('data'),
         );
     }
 
     protected function buildSubscriber(array $data): Subscriber
     {
         return new Subscriber(
-            uuid: strval(data_get($data, 'uuid')),
+            id: (int)data_get($data, 'id'),
             email: strval(data_get($data, 'email')),
             name: new Name(
                 first: strval(data_get($data, 'first_name')),
                 last: strval(data_get($data, 'last_name')),
             ),
-            meta: strval(data_get($data, 'meta')),
-            tags: array_map(
-                callback: fn (string $tag): Tag => new Tag(
-                    name: $tag,
-                ),
-                array: (array) data_get($data, 'tags'),
+            unsubscribed: data_get($data, 'unsubscribed_at')
+                ? Carbon::parse(
+                    time: strval(data_get($data, 'unsubscribed_at'))
+                )
+                : null,
+            created: Carbon::parse(
+                time: strval(data_get($data, 'created_at')),
             ),
-            status: Status::match(
-                value: strval(data_get($data, 'status')),
-            ),
-            confirmed: Carbon::parse(
-                time: strval(data_get($data, 'confirmed_at')),
-            ),
-            unsubscribed: Carbon::parse(
-                time: strval(data_get($data, 'unsubscribed_at')),
+            updated: Carbon::parse(
+                time: strval(data_get($data, 'updated_at')),
             ),
         );
     }

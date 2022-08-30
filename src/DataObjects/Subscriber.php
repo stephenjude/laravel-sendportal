@@ -11,31 +11,24 @@ use SendPortal\Laravel\Enums\Status;
 class Subscriber implements DataObjectContract
 {
     public function __construct(
-        public readonly string $uuid,
+        public readonly int $id,
         public readonly string $email,
         public readonly Name $name,
-        public readonly mixed $meta,
-        public readonly array $tags,
-        public readonly Status $status,
-        public readonly Carbon $confirmed,
         public readonly null|Carbon $unsubscribed,
+        public readonly null|Carbon $created,
+        public readonly null|Carbon $updated,
     ) {
     }
 
     public function toArray(): array
     {
         return [
-            'uuid' => $this->uuid,
+            'id' => $this->id,
             'email' => $this->email,
             'name' => $this->name->toArray(),
-            'meta' => $this->meta,
-            'tags' => array_map(
-                callback: fn (Tag $tag): array => $tag->toArray(),
-                array: $this->tags,
-            ),
-            'status' => $this->status->value,
-            'confirmed' => $this->confirmed,
             'unsubscribed' => $this->unsubscribed,
+            'created' =>  $this->created,
+            'updated' =>  $this->updated,
         ];
     }
 }

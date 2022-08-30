@@ -7,13 +7,13 @@ namespace SendPortal\Laravel\Enums;
 enum Status: string
 {
     case SUBSCRIBED = 'subscribed';
-    case PENDING = 'pending';
+    case UNSUBSCRIBED = 'unsubscribed';
 
     public static function match(string $value): Status
     {
         return match ($value) {
             Status::SUBSCRIBED->value => Status::SUBSCRIBED,
-            Status::PENDING->value => Status::PENDING,
+            Status::UNSUBSCRIBED->value => Status::UNSUBSCRIBED,
             default => Status::SUBSCRIBED,
         };
     }

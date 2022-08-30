@@ -10,7 +10,7 @@ class TagRequest implements DataObjectContract
 {
     public function __construct(
         protected readonly string $name,
-        protected readonly null|bool $allowFormSubscription = null,
+        protected readonly null|array $subscribers = null,
     ) {
     }
 
@@ -18,7 +18,7 @@ class TagRequest implements DataObjectContract
     {
         return [
             'name' => $this->name,
-            'allow_form_subscription' => $this->allowFormSubscription,
+            'subscribers' => $this->subscribers,
         ];
     }
 }

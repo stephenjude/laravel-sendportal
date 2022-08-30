@@ -13,7 +13,7 @@ class SubscriberRequest implements DataObjectContract
         protected readonly null|string $firstName = null,
         protected readonly null|string $lastName = null,
         protected readonly null|array $tags = null,
-        protected readonly null|bool $optIn = null
+        protected readonly null|bool $optOut = null
     ) {
     }
 
@@ -24,7 +24,7 @@ class SubscriberRequest implements DataObjectContract
             'last_name' => $this->lastName,
             'email' => $this->email,
             'tags' => $this->tags,
-            'optin' => $this->optIn,
+            'optin' => $this->optOut,
         ];
     }
 }

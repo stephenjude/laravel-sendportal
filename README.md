@@ -1,4 +1,4 @@
-# Laravel Send Stack
+# Laravel SendPortal
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/stephenjude/laravel-sendportal.svg?style=flat-square)](https://packagist.org/packages/stephenjude/laravel-sendportal)
 [![Test Suite](https://github.com/stephenjude/laravel-sendportal/actions/workflows/tests.yml/badge.svg)](https://github.com/stephenjude/laravel-sendportal/actions/workflows/tests.yml)
@@ -13,17 +13,11 @@ You can install the package via composer:
 composer require stephenjude/laravel-sendportal
 ```
 
-You can publish the config file with:
-
-```bash
-php artisan vendor:publish --tag="sendportal-config"
-```
-
 ## Set up
 
 To start using this package, you need to add environment variables for:
 
-- `SENDPORTAL_URL` - Optional, not really needed as this has a default
+- `SENDPORTAL_URL` - The url of your Sendportal account like this — https://sendportal.io/api/v1
 - `SENDPORTAL_TOKEN` - You can generate this from your SendPortal account.
 
 The package will pick these up in its configuration and use these when it resolves an instance of the `Client`.
@@ -133,14 +127,14 @@ $client = app()->make(
 );
 
 $client->subscribers()->get(
-    query: '1234-1234-1234-1234' // This can be either the subscribers UUID or their Email Address
+    subscriber: 1 
 );
 
 /**
  * Using the Facade
  */
 SendPortal::subscribers()->get(
-    query: '1234-1234-1234-1234', // This can be either the subscribers UUID or their Email Address
+    subscriber: 1,
 );
 ```
 
@@ -160,14 +154,14 @@ $client = app()->make(
 
 $client->subscribers()->create(
     request: new SubscriberRequest(
-        email: 'contact@getsendportal.com', // Required
+        email: 'contact@sendportal.local', // Required
         firstName: 'Send', // Optional
-        lastName: 'Stack', // Optional
+        lastName: 'Portal', // Optional
         tags: [
             'Client',
             'Awesome',
         ], // Optional
-        optIn: true, // Optional
+        optOut: true, // Optional
     ),
 );
 
@@ -176,14 +170,14 @@ $client->subscribers()->create(
  */
 SendPortal::subscribers()->create(
     request: new SubscriberRequest(
-        email: 'contact@getsendportal.com', // Required
+        email: 'contact@sendportal.local', // Required
         firstName: 'Send', // Optional
-        lastName: 'Stack', // Optional
+        lastName: 'Portal', // Optional
         tags: [
             'Client',
             'Awesome',
         ], // Optional
-        optIn: true, // Optional
+        optOut: true, // Optional
     ),
 );
 ```
@@ -203,16 +197,16 @@ $client = app()->make(
 );
 
 $client->subscribers()->update(
-    uuid: '1234-1234-1234-1234',
+    id: 1,
     request: new SubscriberRequest(
-        email: 'contact@getsendportal.com', // Required
+        email: 'contact@sendportal.local', // Required
         firstName: 'Send', // Optional
-        lastName: 'Stack', // Optional
+        lastName: 'Portal', // Optional
         tags: [
-            'Client',
-            'Awesome',
+            1,
+            2,
         ], // Optional
-        optIn: true, // Optional
+        optOut: false, // Optional
     ),
 );
 
@@ -220,16 +214,16 @@ $client->subscribers()->update(
  * Using the Facade
  */
 SendPortal::subscribers()->update(
-    uuid: '1234-1234-1234-1234',
+    id: 1,
     request: new SubscriberRequest(
-        email: 'contact@getsendportal.com', // Required
+        email: 'contact@sendportal.local', // Required
         firstName: 'Send', // Optional
-        lastName: 'Stack', // Optional
+        lastName: 'Portal', // Optional
         tags: [
-            'Client',
-            'Awesome',
+            1,
+            2,
         ], // Optional
-        optIn: true, // Optional
+        optOut: true, // Optional
     ),
 );
 ```
@@ -248,14 +242,14 @@ $client = app()->make(
 );
 
 $client->subscribers()->delete(
-    uuid: '1234-1234-1234-1234'
+    id: 1
 );
 
 /**
  * Using the Facade
  */
 SendPortal::subscribers()->delete(
-    uuid: '1234-1234-1234-1234',
+    id: 1,
 );
 ```
 
@@ -273,16 +267,16 @@ $client = app()->make(
 );
 
 $client->subscribers()->attachTag(
-    uuid: '1234-1234-1234-1234',
-    tag: 'Early Access',
+    id: 1,
+    tag: 1,
 );
 
 /**
  * Using the Facade
  */
 SendPortal::subscribers()->attachTag(
-    uuid: '1234-1234-1234-1234',
-    tag: 'Early Access',
+    id: 1,
+    tag: 1,
 );
 ```
 
@@ -300,16 +294,16 @@ $client = app()->make(
 );
 
 $client->subscribers()->removeTag(
-    uuid: '1234-1234-1234-1234',
-    tag: 'Early Access',
+    id: 1,
+    tag: [1, 2],
 );
 
 /**
  * Using the Facade
  */
 SendPortal::subscribers()->removeTag(
-    uuid: '1234-1234-1234-1234',
-    tag: 'Early Access',
+    id: 1,
+    tag: [1, 2],
 );
 ```
 
@@ -376,7 +370,7 @@ $client = app()->make(
 $client->tags()->create(
     request: new TagRequest(
         name: 'Test', // Required
-        allowFormSubscription: true, // Optional
+        subscribers: [1], // Optional
     ),
 );
 
@@ -386,7 +380,7 @@ $client->tags()->create(
 SendPortal::tags()->create(
     request: new TagRequest(
         name: 'Test', // Required
-        allowFormSubscription: true, // Optional
+        subscribers: [1], // Optional
     ),
 );
 ```
@@ -407,6 +401,7 @@ Please review [our security policy](../../security/policy) on how to report secu
 
 ## Credits
 
+- [Stephen Jude](https://github.com/stephenjude)
 - [Steve McDougall](https://github.com/juststeveking)
 - [All Contributors](../../contributors)
 

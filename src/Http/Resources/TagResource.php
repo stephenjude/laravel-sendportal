@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace SendPortal\Laravel\Http\Resources;
 
+use Illuminate\Support\Carbon;
 use JustSteveKing\DataObjects\Contracts\DataObjectContract;
 use SendPortal\Laravel\Collections\TagCollection;
 use SendPortal\Laravel\DataObjects\Tag;
@@ -17,7 +18,7 @@ class TagResource extends SendPortalResource
     {
         $response = $this->client->send(
             method: Method::GET,
-            url   : '/tags',
+            url: '/tags',
         );
 
         if ($response->failed()) {
@@ -28,10 +29,10 @@ class TagResource extends SendPortalResource
 
         return TagCollection::make(
             items: array_map(
-                callback: fn (string $tag): mixed => $this->buildTag(
+                callback: fn(array $tag): mixed => $this->buildTag(
                     data: $tag
                 ),
-                array: (array) $response->json('data'),
+                array:$response->collect('data')->toArray(),
             ),
         );
     }
@@ -53,14 +54,21 @@ class TagResource extends SendPortalResource
         }
 
         return $this->buildTag(
-            data: strval($response->collect()->first()),
+            data: $response->collect('data')->toArray(),
         );
     }
 
-    protected function buildTag(string $data): DataObjectContract
+    protected function buildTag(array $data): DataObjectContract
     {
         return new Tag(
-            name: $data,
+            id: data_get($data, 'id'),
+            name: data_get($data, 'name'),
+            created: Carbon::parse(
+                time: strval(data_get($data, 'created_at')),
+            ),
+            updated: Carbon::parse(
+                time: strval(data_get($data, 'updated_at')),
+            ),
         );
     }
 }
