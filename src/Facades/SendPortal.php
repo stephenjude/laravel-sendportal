@@ -13,7 +13,7 @@ use SendPortal\Laravel\Http\Resources\TagResource;
 /**
  * @method static SubscribersResource subscribers()
  * @method static TagResource tags()
- * @method static bool isActiveSubscriber(string $email)
+ * @method static bool isActiveSubscriber(int $subscriberId)
  *
  * @see Client
  */

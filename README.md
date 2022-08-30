@@ -161,7 +161,7 @@ $client->subscribers()->create(
             'Client',
             'Awesome',
         ], // Optional
-        optOut: true, // Optional
+        optOut: false, // Optional
     ),
 );
 
@@ -177,7 +177,7 @@ SendPortal::subscribers()->create(
             'Client',
             'Awesome',
         ], // Optional
-        optOut: true, // Optional
+        optOut: false, // Optional
     ),
 );
 ```
@@ -223,7 +223,7 @@ SendPortal::subscribers()->update(
             1,
             2,
         ], // Optional
-        optOut: true, // Optional
+        optOut: false, // Optional
     ),
 );
 ```
@@ -242,14 +242,14 @@ $client = app()->make(
 );
 
 $client->subscribers()->delete(
-    id: 1
+    subscriberId: 1
 );
 
 /**
  * Using the Facade
  */
 SendPortal::subscribers()->delete(
-    id: 1,
+    subscriberId: 1,
 );
 ```
 
@@ -267,16 +267,16 @@ $client = app()->make(
 );
 
 $client->subscribers()->attachTag(
-    id: 1,
-    tag: 1,
+    subscriberId: 1,
+    tagId: 1,
 );
 
 /**
  * Using the Facade
  */
 SendPortal::subscribers()->attachTag(
-    id: 1,
-    tag: 1,
+    subscriberId: 1,
+    tagId: 1,
 );
 ```
 
@@ -294,16 +294,16 @@ $client = app()->make(
 );
 
 $client->subscribers()->removeTag(
-    id: 1,
-    tag: [1, 2],
+    subscriberId: 1,
+    tagIds: 1,
 );
 
 /**
  * Using the Facade
  */
 SendPortal::subscribers()->removeTag(
-    id: 1,
-    tag: [1, 2],
+    subscriberId: 1,
+    tagIds: [1, 2],
 );
 ```
 
@@ -321,14 +321,14 @@ $client = app()->make(
 );
 
 $client->isActiveSubscriber(
-    email: 'taylor@laravel.com',
+    subscriberId: 1,
 );
 
 /**
  * Using the Facade
  */
 SendPortal::isActiveSubscriber(
-    email: 'taylor@laravel.com',
+    subscriberId: 1,
 );
 ```
 

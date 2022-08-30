@@ -44,7 +44,7 @@ class SubscribersResource extends SendPortalResource
     {
         $response = $this->client->send(
             method: Method::GET,
-            url: "/subscribers/{$subscriberId}",
+            url: "/subscribers/$subscriberId",
         );
 
         if ($response->failed()) {
@@ -83,7 +83,7 @@ class SubscribersResource extends SendPortalResource
     {
         $response = $this->client->send(
             method: Method::PUT,
-            url: "/subscribers/{$subscriberId}",
+            url: "/subscribers/$subscriberId",
             options: [
                 'json' => $request->toArray(),
             ]
@@ -104,7 +104,7 @@ class SubscribersResource extends SendPortalResource
     {
         $response = $this->client->send(
             method: Method::DELETE,
-            url: "/subscribers/{$subscriberId}",
+            url: "/subscribers/$subscriberId",
         );
 
         if ($response->failed()) {
@@ -116,13 +116,15 @@ class SubscribersResource extends SendPortalResource
         return $response->successful();
     }
 
-    public function attachTag(int $subscriberId, int $tag): Subscriber
+    public function attachTags(int $subscriberId, array|int $tagIds): Subscriber
     {
         $response = $this->client->send(
             method: Method::POST,
             url: "/subscribers/{$subscriberId}/tags",
             options: [
-                'json' => ['tag' => $tag],
+                'json' => [
+                    'tags' => is_array($tagIds) ? $tagIds : [$tagIds]
+                ],
             ]
         );
 
@@ -137,11 +139,16 @@ class SubscribersResource extends SendPortalResource
         );
     }
 
-    public function removeTag(int $subscriberId, int $tag): Subscriber
+    public function removeTags(int $subscriberId, array|int $tagIds): Subscriber
     {
         $response = $this->client->send(
             method: Method::DELETE,
-            url: "/subscribers/{$subscriberId}/tags/{$tag}",
+            url: "/subscribers/{$subscriberId}/tags",
+            options: [
+                'json' => [
+                    'tags' => is_array($tagIds) ? $tagIds : [$tagIds]
+                ],
+            ]
         );
 
         if ($response->failed()) {
