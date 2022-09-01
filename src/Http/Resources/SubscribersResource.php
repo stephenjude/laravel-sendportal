@@ -69,6 +69,9 @@ class SubscribersResource extends SendPortalResource
         );
 
         if ($response->failed()) {
+
+            dd($response->body());
+
             throw new SendPortalApiException(
                 response: $response,
             );
