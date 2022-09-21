@@ -9,9 +9,7 @@ use JustSteveKing\DataObjects\Contracts\DataObjectContract;
 use SendPortal\Laravel\Collections\SubscriberCollection;
 use SendPortal\Laravel\DataObjects\Name;
 use SendPortal\Laravel\DataObjects\Subscriber;
-use SendPortal\Laravel\DataObjects\Tag;
 use SendPortal\Laravel\Enums\Method;
-use SendPortal\Laravel\Enums\Status;
 use SendPortal\Laravel\Exceptions\SendPortalApiException;
 use SendPortal\Laravel\Http\Requests\SubscriberRequest;
 
@@ -32,7 +30,7 @@ class SubscribersResource extends SendPortalResource
 
         return SubscriberCollection::make(
             items: array_map(
-                callback: fn(array $subscriber): DataObjectContract => $this->buildSubscriber(
+                callback: fn (array $subscriber): DataObjectContract => $this->buildSubscriber(
                     data: $subscriber
                 ),
                 array: $response->collect('data')->toArray(),
@@ -69,7 +67,6 @@ class SubscribersResource extends SendPortalResource
         );
 
         if ($response->failed()) {
-
             dd($response->body());
 
             throw new SendPortalApiException(

@@ -6,7 +6,6 @@ namespace SendPortal\Laravel\DataObjects;
 
 use Illuminate\Support\Carbon;
 use JustSteveKing\DataObjects\Contracts\DataObjectContract;
-use SendPortal\Laravel\Enums\Status;
 
 class Subscriber implements DataObjectContract
 {

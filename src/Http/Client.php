@@ -11,7 +11,6 @@ use SendPortal\Laravel\Concerns\CanAccessProperties;
 use SendPortal\Laravel\Concerns\CanBuildRequests;
 use SendPortal\Laravel\Concerns\CanSendRequests;
 use SendPortal\Laravel\Contracts\ClientContract;
-use SendPortal\Laravel\Enums\Status;
 use SendPortal\Laravel\Http\Resources\SubscribersResource;
 use SendPortal\Laravel\Http\Resources\TagResource;
 use Throwable;
@@ -55,7 +54,6 @@ class Client implements ClientContract
             $subscriber = $this->subscribers()->get(
                 subscriberId: $subscriberId,
             );
-
         } catch (Throwable) {
             return false;
         }
