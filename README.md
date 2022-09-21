@@ -5,6 +5,8 @@
 [![Total Downloads](https://img.shields.io/packagist/dt/stephenjude/laravel-sendportal.svg?style=flat-square)](https://packagist.org/packages/stephenjude/laravel-sendportal)
 <!--delete-->
 
+The Unofficial Laravel Package to work with the SendPortal APIs.
+
 ## Installation
 
 You can install the package via composer:
