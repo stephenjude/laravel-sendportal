@@ -77,8 +77,8 @@ SendPortal::subscribers()->create(
         firstName: 'Send', // Optional
         lastName: 'Portal', // Optional
         tags: [
-            'Client',
-            'Awesome',
+            1,
+            2,
         ], // Optional
         optOut: false, // Optional
     ),
