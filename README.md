@@ -1,4 +1,4 @@
-# Laravel SendPortal
+# Laravel SendPortal SDK
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/stephenjude/laravel-sendportal.svg?style=flat-square)](https://packagist.org/packages/stephenjude/laravel-sendportal)
 [![Test Suite](https://github.com/stephenjude/laravel-sendportal/actions/workflows/tests.yml/badge.svg)](https://github.com/stephenjude/laravel-sendportal/actions/workflows/tests.yml)
