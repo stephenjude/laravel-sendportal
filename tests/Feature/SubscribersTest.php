@@ -43,7 +43,7 @@ it('can get a list of subscribers', function (int $integer, string $string) {
     )->toBeInstanceOf(
         SubscriberCollection::class
     )->each(
-        fn($subscriber) => $subscriber->toBeInstanceOf(Subscriber::class),
+        fn ($subscriber) => $subscriber->toBeInstanceOf(Subscriber::class),
     );
 })->with('integers', 'strings');
 

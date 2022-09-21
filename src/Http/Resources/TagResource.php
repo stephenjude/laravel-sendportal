@@ -29,7 +29,7 @@ class TagResource extends SendPortalResource
 
         return TagCollection::make(
             items: array_map(
-                callback: fn(array $tag): mixed => $this->buildTag(
+                callback: fn (array $tag): mixed => $this->buildTag(
                     data: $tag
                 ),
                 array:$response->collect('data')->toArray(),

@@ -37,7 +37,7 @@ it('can get a list of tags', function (int $integer, string $string) {
     )->toBeInstanceOf(
         TagCollection::class
     )->each(
-        fn($tag) => $tag
+        fn ($tag) => $tag
             ->toBeInstanceOf(Tag::class),
     );
 })->with('integers', 'strings');
