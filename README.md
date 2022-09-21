@@ -24,13 +24,10 @@ The package will pick these up in its configuration and use these when it resolv
 
 ## Usage
 
-This package can be used by injecting the `SendPortal\Laravel\Http\Client` into a method to instantiate the client:
-
-### Getting a list of Subscribers
-
+This package can be used by using the `SendPortal` facade or by injecting the `SendPortal\Laravel\Http\Client` into a method to instantiate the client:
 ```php
-use SendPortal\Laravel\Contracts\ClientContract;
-use SendPortal\Laravel\Facades\SendPortal;
+use SendStack\Laravel\Contracts\ClientContract;
+use SendStack\Laravel\Facades\SendStack;
 
 /**
  * Without a Facade
@@ -41,32 +38,26 @@ $client = app()->make(
 
 $client->subscribers()->all();
 
+
 /**
- * Using the Facade
+ *  Using the Facade
  */
+SendPortal::subscribers()->all();
+```
+
+### Getting a list of Subscribers
+
+```php
+use SendPortal\Laravel\Facades\SendPortal;
+
 SendPortal::subscribers()->all();
 ```
 
 ### Getting a single Subscriber
 
 ```php
-use SendPortal\Laravel\Contracts\ClientContract;
 use SendPortal\Laravel\Facades\SendPortal;
 
-/**
- * Without a Facade
- */
-$client = app()->make(
-    abstract: ClientContract::class,
-);
-
-$client->subscribers()->get(
-    subscriber: 1 
-);
-
-/**
- * Using the Facade
- */
 SendPortal::subscribers()->get(
     subscriber: 1,
 );
@@ -75,33 +66,9 @@ SendPortal::subscribers()->get(
 ### Creating a new Subscriber
 
 ```php
-use SendPortal\Laravel\Contracts\ClientContract;
 use SendPortal\Laravel\Facades\SendPortal;
 use SendPortal\Laravel\Http\Requests\SubscriberRequest;
 
-/**
- * Without a Facade
- */
-$client = app()->make(
-    abstract: ClientContract::class,
-);
-
-$client->subscribers()->create(
-    request: new SubscriberRequest(
-        email: 'contact@sendportal.local', // Required
-        firstName: 'Send', // Optional
-        lastName: 'Portal', // Optional
-        tags: [
-            'Client',
-            'Awesome',
-        ], // Optional
-        optOut: false, // Optional
-    ),
-);
-
-/**
- * Using the Facade
- */
 SendPortal::subscribers()->create(
     request: new SubscriberRequest(
         email: 'contact@sendportal.local', // Required
@@ -119,34 +86,9 @@ SendPortal::subscribers()->create(
 ### Update a Subscriber
 
 ```php
-use SendPortal\Laravel\Contracts\ClientContract;
 use SendPortal\Laravel\Facades\SendPortal;
 use SendPortal\Laravel\Http\Requests\SubscriberRequest;
 
-/**
- * Without a Facade
- */
-$client = app()->make(
-    abstract: ClientContract::class,
-);
-
-$client->subscribers()->update(
-    id: 1,
-    request: new SubscriberRequest(
-        email: 'contact@sendportal.local', // Required
-        firstName: 'Send', // Optional
-        lastName: 'Portal', // Optional
-        tags: [
-            1,
-            2,
-        ], // Optional
-        optOut: false, // Optional
-    ),
-);
-
-/**
- * Using the Facade
- */
 SendPortal::subscribers()->update(
     id: 1,
     request: new SubscriberRequest(
@@ -165,23 +107,8 @@ SendPortal::subscribers()->update(
 ### Deleting a Subscriber
 
 ```php
-use SendPortal\Laravel\Contracts\ClientContract;
 use SendPortal\Laravel\Facades\SendPortal;
 
-/**
- * Without a Facade
- */
-$client = app()->make(
-    abstract: ClientContract::class,
-);
-
-$client->subscribers()->delete(
-    subscriberId: 1
-);
-
-/**
- * Using the Facade
- */
 SendPortal::subscribers()->delete(
     subscriberId: 1,
 );
@@ -190,24 +117,8 @@ SendPortal::subscribers()->delete(
 ### Attaching a Tag to a Subscriber
 
 ```php
-use SendPortal\Laravel\Contracts\ClientContract;
 use SendPortal\Laravel\Facades\SendPortal;
 
-/**
- * Without a Facade
- */
-$client = app()->make(
-    abstract: ClientContract::class,
-);
-
-$client->subscribers()->attachTag(
-    subscriberId: 1,
-    tagId: 1,
-);
-
-/**
- * Using the Facade
- */
 SendPortal::subscribers()->attachTag(
     subscriberId: 1,
     tagId: 1,
@@ -217,24 +128,8 @@ SendPortal::subscribers()->attachTag(
 ### Removing a Tag from a Subscriber
 
 ```php
-use SendPortal\Laravel\Contracts\ClientContract;
 use SendPortal\Laravel\Facades\SendPortal;
 
-/**
- * Without a Facade
- */
-$client = app()->make(
-    abstract: ClientContract::class,
-);
-
-$client->subscribers()->removeTag(
-    subscriberId: 1,
-    tagIds: 1,
-);
-
-/**
- * Using the Facade
- */
 SendPortal::subscribers()->removeTag(
     subscriberId: 1,
     tagIds: [1, 2],
@@ -244,23 +139,8 @@ SendPortal::subscribers()->removeTag(
 ### Checking if an email address is an Active Subscriber
 
 ```php
-use SendPortal\Laravel\Contracts\ClientContract;
 use SendPortal\Laravel\Facades\SendPortal;
 
-/**
- * Without a Facade
- */
-$client = app()->make(
-    abstract: ClientContract::class,
-);
-
-$client->isActiveSubscriber(
-    subscriberId: 1,
-);
-
-/**
- * Using the Facade
- */
 SendPortal::isActiveSubscriber(
     subscriberId: 1,
 );
@@ -269,48 +149,17 @@ SendPortal::isActiveSubscriber(
 ### Getting all Tags
 
 ```php
-use SendPortal\Laravel\Contracts\ClientContract;
 use SendPortal\Laravel\Facades\SendPortal;
 
-/**
- * Without a Facade
- */
-$client = app()->make(
-    abstract: ClientContract::class,
-);
-
-$client->tags()->all();
-
-/**
- * Using the Facade
- */
 SendPortal::tags()->all();
 ```
 
 ### Creating a new Tag
 
 ```php
-use SendPortal\Laravel\Contracts\ClientContract;
 use SendPortal\Laravel\Facades\SendPortal;
 use SendPortal\Laravel\Http\Requests\TagRequest;
 
-/**
- * Without a Facade
- */
-$client = app()->make(
-    abstract: ClientContract::class,
-);
-
-$client->tags()->create(
-    request: new TagRequest(
-        name: 'Test', // Required
-        subscribers: [1], // Optional
-    ),
-);
-
-/**
- * Using the Facade
- */
 SendPortal::tags()->create(
     request: new TagRequest(
         name: 'Test', // Required
