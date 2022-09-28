@@ -28,8 +28,8 @@ The package will pick these up in its configuration and use these when it resolv
 
 This package can be used by using the `SendPortal` facade or by injecting the `SendPortal\Laravel\Http\Client` into a method to instantiate the client:
 ```php
-use SendStack\Laravel\Contracts\ClientContract;
-use SendStack\Laravel\Facades\SendStack;
+use SendPortal\Laravel\Contracts\ClientContract;
+use SendPortal\Laravel\Facades\SendStack;
 
 /**
  * Without a Facade
