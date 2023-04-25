@@ -29,7 +29,7 @@
     },
     "require": {
         "php": "^8.1",
-        "illuminate/contracts": "^9.25",
+        "illuminate/contracts": "^9.25|^10.0",
         "juststeveking/http-status-code": "^3.0",
         "juststeveking/laravel-data-object-tools": "^1.0"
     },
